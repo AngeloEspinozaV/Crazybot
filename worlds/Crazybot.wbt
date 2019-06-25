@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.2319001307693218 0.9503436268806026 0.207531492059864 1.510740396385745
-  position 0.7268932755519179 0.5197044211142734 0.14122684486830533
+  orientation 0.6597021686484773 -0.729011895389441 -0.1825779424278602 5.557529960878211
+  position 0.4990172963850625 0.7225584860964607 0.7615466508970294
 }
 TexturedBackground {
 }
@@ -14,15 +14,35 @@ Floor {
 Robot {
   translation 0 0.2 0
   children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.12549019607843137 0.2901960784313726 0.5294117647058824
-        roughness 1
-        metalness 0
-      }
-      geometry Box {
-        size 0.25 0.08 0.1
-      }
+    DEF BODY_GROUP Group {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.12549019607843137 0.2901960784313726 0.5294117647058824
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.25 0.08 0.1
+          }
+        }
+        Transform {
+          translation 0.1075 -0.0575 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.9294117647058824 0.8313725490196079 0
+                roughness 1
+                metalness 0
+              }
+              geometry Sphere {
+                radius 0.0175
+                subdivision 2
+              }
+            }
+          ]
+        }
+      ]
     }
     HingeJoint {
       jointParameters HingeJointParameters {
@@ -33,8 +53,8 @@ Robot {
         translation -0.05 0 0.065
         rotation 1 0 0 1.578
         children [
-          Shape {
-            appearance PBRAppearance {
+          DEF WHEEL_SH Shape {
+            appearance DEF COLOR_WHEEL PBRAppearance {
               baseColor 0.8 0 0
               roughness 1
               metalness 0
@@ -47,5 +67,22 @@ Robot {
         ]
       }
     }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.05 0 -0.065
+      }
+      endPoint Solid {
+        translation -0.05 0 -0.065
+        rotation 1 0 0 1.5699996938995748
+        children [
+          USE WHEEL_SH
+        ]
+        name "solid(1)"
+      }
+    }
   ]
+  boundingObject USE BODY_GROUP
+  physics Physics {
+  }
 }
