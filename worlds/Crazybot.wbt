@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.6597021686484773 -0.729011895389441 -0.1825779424278602 5.557529960878211
-  position 0.4990172963850625 0.7225584860964607 0.7615466508970294
+  orientation 0.18570391075073212 -0.98109834719615 -0.054406715218498686 5.702804761944932
+  position 0.8285175313403393 0.42802105755752945 1.2197123092165973
 }
 TexturedBackground {
 }
@@ -12,7 +12,7 @@ TexturedBackgroundLight {
 Floor {
 }
 Robot {
-  translation 0 0.2 0
+  translation 0 0.075 0
   children [
     DEF BODY_GROUP Group {
       children [
@@ -65,6 +65,7 @@ Robot {
             }
           }
         ]
+        boundingObject USE WHEEL_SH
       }
     }
     HingeJoint {
@@ -79,6 +80,7 @@ Robot {
           USE WHEEL_SH
         ]
         name "solid(1)"
+        boundingObject USE WHEEL_SH
       }
     }
   ]
