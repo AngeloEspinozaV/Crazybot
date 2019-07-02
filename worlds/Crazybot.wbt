@@ -52,8 +52,12 @@ Robot {
       device [
         RotationalMotor {
           name "motor_right"
-          maxVelocity 523.599
+          maxVelocity 52.35
           maxTorque 0.593170353999997
+        }
+        PositionSensor {
+          name "position_sensor_right"
+          resolution 0.005235833
         }
       ]
       endPoint Solid {
