@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.33761116726320517 0.8774507660452439 0.34073281747696504 4.572905249906938
-  position -1.2520140502796213 1.3089069778481057 0.08203431162636417
+  orientation -0.0010008552520730746 -0.9712427669213571 -0.23808923955464847 3.1334270764733554
+  position 0.09308029314158028 0.364949039659274 -0.5153375680343067
 }
 TexturedBackground {
 }
@@ -53,7 +53,7 @@ Robot {
         RotationalMotor {
           name "motor_right"
           maxVelocity 523.599
-          maxTorque 0.03
+          maxTorque 0.593170353999997
         }
       ]
       endPoint Solid {
@@ -101,8 +101,28 @@ Robot {
         }
       }
     }
+    DistanceSensor {
+      translation 0.125 0 0
+      children [
+        Shape {
+          appearance USE COLOR_WHEEL
+          geometry DEF DIST_SEN Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "distance_sensor"
+      boundingObject USE DIST_SEN
+      lookupTable [
+        0 0 0
+        0.02 0 0
+        5 1660 0
+      ]
+      resolution 1
+    }
   ]
   boundingObject USE BODY_GROUP
   physics Physics {
   }
+  controller "Crazybot"
 }
