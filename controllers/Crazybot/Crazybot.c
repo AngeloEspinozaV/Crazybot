@@ -13,6 +13,8 @@
 #include <webots/robot.h>
 #include <webots/motor.h> 
 #include <webots/keyboard.h>
+#include <webots/distance_sensor.h>
+#include <webots/position_sensor.h>
 #include <stdio.h>
 #define PI 3.141592
 /*
@@ -61,6 +63,7 @@ int main(int argc, char **argv)
   wb_distance_sensor_enable(ds, TIME_STEP);
   wb_position_sensor_enable(ps_right, TIME_STEP);
   wb_position_sensor_enable(ps_left, TIME_STEP);
+  
   double ds_val;
   double ps_right_val;
   double ps_left_val;
@@ -68,7 +71,7 @@ int main(int argc, char **argv)
   while (wb_robot_step(TIME_STEP) != -1) 
   {
      // double speed = -1; //[rad/s] 
-     key = wb_keyboard_get_key();
+
      float forwardSpeed = -3/0.075;
      float backwardSpeed = 0.1/0.075;
      
@@ -79,6 +82,16 @@ int main(int argc, char **argv)
      // /* LEFT */
 
      // wb_motor_set_velocity(motor_left, -40);
+     ds_val = wb_distance_sensor_get_value(ds);
+     printf("Distance sensor value: %lf\n", ds_val);
+     
+     ps_right_val = wb_position_sensor_get_value(ps_right);
+     printf("Right position sensor value: %lf\n", ps_right_val);
+     
+     ps_left_val = wb_position_sensor_get_value(ps_left);
+     printf("Left position sensor value: %lf\n", ps_left_val);
+     
+     key = wb_keyboard_get_key();
      
      if(key == WB_KEYBOARD_UP)
      {
