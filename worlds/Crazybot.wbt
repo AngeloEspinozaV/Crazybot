@@ -131,7 +131,7 @@ Robot {
   ]
   boundingObject USE BODY_GROUP
   physics Physics {
-    density 1200
+    density 1100
   }
   controller "Crazybot"
 }

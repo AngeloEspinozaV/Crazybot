@@ -43,6 +43,13 @@ int main(int argc, char **argv)
   WbDeviceTag motor_right = wb_robot_get_device("motor_right");
   WbDeviceTag motor_left = wb_robot_get_device("motor_left");
   
+  /* IMPORTING DISTANCE SENSOR */
+  WbDeviceTag ds = wb_robot_get_device("distance_sensor");
+  
+  /* IMPORTING POSITION SENSOR */
+  WbDeviceTag ps_right = wb_robot_get_device("position_sensor_right");
+  WbDeviceTag ps_left = wb_robot_get_device("position_sensor_left");
+
   /* main loop
    * Perform simulation steps of TIME_STEP milliseconds
    * and leave the loop when the simulation is over
@@ -51,6 +58,12 @@ int main(int argc, char **argv)
   wb_motor_set_position(motor_left, INFINITY);
   wb_motor_set_position(motor_right, INFINITY); 
   wb_keyboard_enable(TIME_STEP); 
+  wb_distance_sensor_enable(ds, TIME_STEP);
+  wb_position_sensor_enable(ps_right, TIME_STEP);
+  wb_position_sensor_enable(ps_left, TIME_STEP);
+  double ds_val;
+  double ps_right_val;
+  double ps_left_val;
 
   while (wb_robot_step(TIME_STEP) != -1) 
   {
@@ -61,11 +74,11 @@ int main(int argc, char **argv)
      
      /* RIGHT */
      
-     // wb_motor_set_velocity(motor_right, -30);
+     // wb_motor_set_velocity(motor_right, 0);
           
-     /* LEFT */
+     // /* LEFT */
 
-     // wb_motor_set_velocity(motor_left, -30);
+     // wb_motor_set_velocity(motor_left, -40);
      
      if(key == WB_KEYBOARD_UP)
      {
