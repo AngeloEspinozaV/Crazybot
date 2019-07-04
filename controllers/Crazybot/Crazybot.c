@@ -12,8 +12,9 @@
  */
 #include <webots/robot.h>
 #include <webots/motor.h> 
-#include <stdio.h>
 #include <webots/keyboard.h>
+#include <stdio.h>
+#define PI 3.141592
 /*
  * You may want to add macros here.
  */
@@ -24,41 +25,91 @@
  * The arguments of the main function can be specified by the
  * "controllerArgs" field of the Robot node
  */
+float MetSec2RadSec(float speed, float radius); 
+float LinearVelocity(float radius, float RPM);
+ 
 int main(int argc, char **argv)
 {
+  int key;
   /* necessary to initialize webots stuff */
   wb_robot_init();
   /*
-   * You should declare here WbDeviceTag variables for storing
-   * robot devices like this:
+   *  You should declare here WbDeviceTag variables for storing
+   *  robot devices like this:
    *  WbDeviceTag my_sensor = wb_robot_get_device("my_sensor");
    *  WbDeviceTag my_actuator = wb_robot_get_device("my_actuator");
    */
+  /* IMPORTING MOTORS */
   WbDeviceTag motor_right = wb_robot_get_device("motor_right");
   WbDeviceTag motor_left = wb_robot_get_device("motor_left");
-  wb_keyboard_enable(TIME_STEP);
-  //int key;
-
+  
   /* main loop
    * Perform simulation steps of TIME_STEP milliseconds
    * and leave the loop when the simulation is over
    */
+   
   wb_motor_set_position(motor_left, INFINITY);
-  wb_motor_set_position(motor_right, INFINITY);  
+  wb_motor_set_position(motor_right, INFINITY); 
+  wb_keyboard_enable(TIME_STEP); 
+
   while (wb_robot_step(TIME_STEP) != -1) 
   {
-     double speed = 1.5; //[rad/s] 
+     // double speed = -1; //[rad/s] 
+     key = wb_keyboard_get_key();
+     float forwardSpeed = -3/0.075;
+     float backwardSpeed = 0.1/0.075;
      
      /* RIGHT */
      
-     wb_motor_set_velocity(motor_right, speed);
+     // wb_motor_set_velocity(motor_right, -30);
           
      /* LEFT */
 
-     wb_motor_set_velocity(motor_left, speed);
+     // wb_motor_set_velocity(motor_left, -30);
      
-     printf("HelloWorld");
+     if(key == WB_KEYBOARD_UP)
+     {
+       wb_motor_set_velocity(motor_right, forwardSpeed);
+       wb_motor_set_velocity(motor_left, forwardSpeed);
+                   
+       printf("The Linear Velocity is: %f\n", LinearVelocity(0.075,-forwardSpeed)); 
+       printf("Right Wheel RPM is: %f\n", 382.2629); 
+       printf("Left Wheel RPM is: %f\n", 382.2629);      
+     }
+     else if(key == WB_KEYBOARD_LEFT)
+     {
+       wb_motor_set_velocity(motor_right, -52.3);
+       wb_motor_set_velocity(motor_left, 0);
+       printf("Right Wheel RPM is: %d\n", 500); 
+       printf("Left Wheel RPM is: %d\n", 0); 
+     }
+     else if(key == WB_KEYBOARD_RIGHT)
+     {
+       wb_motor_set_velocity(motor_right, 0);
+       wb_motor_set_velocity(motor_left, -52.3);
+       printf("Right Wheel RPM is: %d\n", 0); 
+       printf("Left Wheel RPM is: %d\n", 500); 
+     }
+     else if(key == WB_KEYBOARD_DOWN)
+     {
+       wb_motor_set_velocity(motor_right, backwardSpeed);
+       wb_motor_set_velocity(motor_left, backwardSpeed);
+       
+       printf("The Linear Velocity is: %f\n", LinearVelocity(0.075, backwardSpeed));       
+       printf("Right Wheel RPM is: %f\n", 12.7417);    
+       printf("Left Wheel RPM is: %f\n", 12.7417);      
+  
+     }
+     else
+     {
+       wb_motor_set_velocity(motor_right, 0);
+       wb_motor_set_velocity(motor_left, 0);
+       printf("The Linear Velocity is: %d\n", 0); 
+       printf("Right Wheel RPM is: %d\n", 0); 
+       printf("Left Wheel RPM is: %d\n", 0);  
+     }
      
+     // printf("%d\n", key);
     /*
      * Read the sensors :
      * Enter here functions to read sensor data, like:
@@ -103,4 +154,18 @@ int main(int argc, char **argv)
   wb_robot_cleanup();
 
   return 0;
+}
+
+float MetSec2RadSec(float speed, float radius)
+{
+  return speed/radius;
+}
+float LinearVelocity(float radius, float RPM)
+{
+  float vel;
+  
+  RPM = (RPM * 500)/52.32;
+  vel = ((2*PI*radius)/60)*RPM;
+  
+  return vel;
 }

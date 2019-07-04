@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.0010008552520730746 -0.9712427669213571 -0.23808923955464847 3.1334270764733554
-  position 0.09308029314158028 0.364949039659274 -0.5153375680343067
+  orientation -0.07724710877881215 0.9969580790745695 0.01036690663886619 0.2676191299438586
+  position 0.2507239507439579 0.10806934920983761 0.6332380920358878
 }
 TexturedBackground {
 }
@@ -61,8 +61,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.05 0 0.065
-        rotation 1 0 0 1.5779999999999998
+        translation -0.05000083806152519 1.3046599663638971e-05 0.0649999995234742
+        rotation 1 1.5870661669334776e-09 -1.9672302125085397e-09 1.5779999776543139
         children [
           DEF WHEEL_SH Shape {
             appearance DEF COLOR_WHEEL PBRAppearance {
@@ -89,13 +89,17 @@ Robot {
       device [
         RotationalMotor {
           name "motor_left"
-          maxVelocity 523.599
-          maxTorque 0.03
+          maxVelocity 52.4
+          maxTorque 0.593
+        }
+        PositionSensor {
+          name "position_sensor_left"
+          resolution 0.00524
         }
       ]
       endPoint Solid {
-        translation -0.05 0 -0.065
-        rotation 1 0 0 1.5699996938995748
+        translation -0.050000830391737056 1.329150513769556e-05 -0.064999999543304
+        rotation 1 3.656383177911341e-09 -4.0262105148082014e-09 1.5699997005667823
         children [
           USE WHEEL_SH
         ]
@@ -127,6 +131,7 @@ Robot {
   ]
   boundingObject USE BODY_GROUP
   physics Physics {
+    density 1200
   }
   controller "Crazybot"
 }
