@@ -61,8 +61,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.050002580286428164 3.780897306187956e-05 0.06500000195888461
-        rotation 0.9984367074513493 -0.03966513865991629 -0.03938042646796097 1.5795644029284133
+        translation -0.049959223037314794 0.0001970808113373263 0.06500014798776974
+        rotation 0.9814077045141054 -0.1362063662349753 -0.13522848559907097 1.5967626762485743
         children [
           DEF WHEEL_SH Shape {
             appearance DEF COLOR_WHEEL PBRAppearance {
@@ -98,8 +98,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.050002315997806586 3.863517469715169e-05 -0.06499999705275784
-        rotation 0.998417954521537 -0.03974335679151976 -0.03977503840314985 1.5715830040453898
+        translation -0.0499430021756722 0.00018471641920189843 -0.06499986680992198
+        rotation 0.9809091626032806 -0.1374539208822935 -0.1375632013113067 1.5892724250190167
         children [
           USE WHEEL_SH
         ]
@@ -130,7 +130,7 @@ Robot {
   ]
   boundingObject USE BODY_GROUP
   physics Physics {
-    density 1100
+    density 1130
   }
   controller "Crazybot"
 }
@@ -143,9 +143,10 @@ Solid {
         roughness 1
         metalness 0
       }
-      geometry Box {
+      geometry DEF OBSTACLE_SIZE Box {
         size 0.4 0.4 0.4
       }
     }
   ]
+  boundingObject USE OBSTACLE_SIZE
 }
