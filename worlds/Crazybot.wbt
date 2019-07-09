@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.19733137713786125 -0.9763339989308764 -0.08850000072609426 0.8612129784740865
-  position -1.5280040663845875 0.4865078279212693 1.3147149751595983
+  orientation -0.4368762408312392 -0.8918848638917417 -0.11696383953160251 0.5832471992185964
+  position -0.9824836937475583 0.5710065531519418 1.6556474829094785
 }
 TexturedBackground {
 }
@@ -57,7 +57,7 @@ Robot {
         }
         PositionSensor {
           name "position_sensor_right"
-          resolution 1
+          resolution 0.00524
         }
       ]
       endPoint Solid {
